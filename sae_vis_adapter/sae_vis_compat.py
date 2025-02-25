@@ -4,6 +4,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import einops
 import importlib
+import os
+import numpy as np
 from typing import List, Dict, Optional, Any, Union, Tuple
 
 from .adapter import CrossCoderAdapter, CrossCoderConfig
@@ -11,12 +13,54 @@ from .transformer_lens_adapter import TransformerLensWrapperAdapter
 from .observable_model import ObservableModel
 
 # Function to dynamically import sae_vis modules
-def import_sae_vis_modules(sae_vis_path: str = "sae_vis-crosscoder-vis/sae_vis"):
-    """Import sae_vis modules for direct compatibility"""
-    if sae_vis_path not in sys.path:
-        sys.path.append(sae_vis_path)
+def import_sae_vis_modules(sae_vis_path: str) -> Dict[str, Any]:
+    """
+    Dynamically import sae_vis modules from the specified path
     
+    Args:
+        sae_vis_path: Path to the sae_vis package root directory
+        
+    Returns:
+        Dictionary mapping module names to imported modules
+    """
     try:
+        # Add the parent directory to sys.path so Python can find the sae_vis package
+        if sae_vis_path not in sys.path:
+            sys.path.append(sae_vis_path)
+        
+        # For debugging
+        print(f"Python path now includes: {sae_vis_path}")
+        print(f"Full sys.path: {sys.path}")
+        
+        # Try to verify the directory structure
+        sae_vis_dir = os.path.join(sae_vis_path, "sae_vis")
+        if os.path.exists(sae_vis_dir):
+            print(f"Found sae_vis directory at {sae_vis_dir}")
+            print(f"Contents: {os.listdir(sae_vis_dir)}")
+        else:
+            print(f"Warning: Could not find sae_vis directory at {sae_vis_dir}")
+            # If sae_vis directory doesn't exist at this path, maybe the path itself is the sae_vis directory
+            if os.path.exists(os.path.join(sae_vis_path, "model_fns.py")):
+                print(f"Found model_fns.py directly in {sae_vis_path}")
+                # In this case, use the path directly without 'sae_vis' prefix
+                # Add the directory containing the Python files to sys.path
+                sys.path.append(os.path.dirname(sae_vis_path))
+                print(f"Using directory {sae_vis_path} as a module")
+                
+                # Try importing modules directly by name
+                model_fns = importlib.import_module("model_fns")
+                data_config_classes = importlib.import_module("data_config_classes")
+                data_storing_fns = importlib.import_module("data_storing_fns")
+                data_fetching_fns = importlib.import_module("data_fetching_fns")
+                
+                # Return the modules
+                return {
+                    "model_fns": model_fns,
+                    "data_config_classes": data_config_classes,
+                    "data_storing_fns": data_storing_fns,
+                    "data_fetching_fns": data_fetching_fns
+                }
+        
         # Import the original modules for configuration types
         sae_vis_model_fns = importlib.import_module("sae_vis.model_fns")
         sae_vis_data_config = importlib.import_module("sae_vis.data_config_classes")
@@ -29,9 +73,16 @@ def import_sae_vis_modules(sae_vis_path: str = "sae_vis-crosscoder-vis/sae_vis")
             "data_storing_fns": sae_vis_data_storing,
             "data_fetching_fns": sae_vis_data_fetching
         }
-    except ImportError as e:
+    except Exception as e:
         print(f"Error importing sae_vis modules: {e}")
         print(f"Make sure the path '{sae_vis_path}' is correct and contains the sae_vis package.")
+        
+        # List the actual directory contents to help diagnose
+        try:
+            print(f"Contents of {sae_vis_path}: {os.listdir(sae_vis_path)}")
+        except:
+            print(f"Could not list contents of {sae_vis_path}")
+            
         raise
 
 
