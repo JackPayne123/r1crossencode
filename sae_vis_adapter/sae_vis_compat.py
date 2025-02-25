@@ -263,8 +263,8 @@ def create_sae_vis_compatible_encoder(hf_crosscoder, d_in, d_hidden=None,
         DirectCrossCoderAdapter instance compatible with sae_vis
     """
     # Import original CrossCoderConfig
-    sae_vis_modules = import_sae_vis_modules()
-    orig_CrossCoderConfig = sae_vis_modules["model_fns"].CrossCoderConfig
+    sae_vis_modules = get_sae_vis_modules()
+    CrossCoderConfig = sae_vis_modules["model_fns"].CrossCoderConfig 
     
     # Infer d_hidden if not provided
     if d_hidden is None and hf_crosscoder is not None:

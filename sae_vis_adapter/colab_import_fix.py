@@ -154,3 +154,4 @@ else:
     print("1. Ensure sae_vis-crosscoder-vis is correctly cloned from github")
     print("2. Check that model_fns.py and other modules exist in the expected location")
     print("3. Try setting up a symbolic link: !ln -s /path/to/sae_vis /content/sae_vis") 
+
