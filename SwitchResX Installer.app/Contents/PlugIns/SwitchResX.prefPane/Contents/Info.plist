@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>24C101</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>SwitchResX</string>
+	<key>CFBundleIconFile</key>
+	<string>SRXPrefPane.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>fr.madrau.switchresx.prefpane</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SwitchResX</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.14.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>4.14.0</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>24B75</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
+	<key>DTPlatformVersion</key>
+	<string>15.1</string>
+	<key>DTSDKBuild</key>
+	<string>21E226</string>
+	<key>DTSDKName</key>
+	<string>macosx12.3</string>
+	<key>DTXcode</key>
+	<string>1610</string>
+	<key>DTXcodeBuild</key>
+	<string>16B40</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.9</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright ©1997-2025, Stéphane Madrau, All Rights Reserved.</string>
+	<key>NSMainNibFile</key>
+	<string>SRXPrefPanePref</string>
+	<key>NSPrefPaneIconFile</key>
+	<string>SRXPrefPaneIcon.icns</string>
+	<key>NSPrefPaneIconLabel</key>
+	<string>SwitchResX</string>
+	<key>NSPrefPaneIconName</key>
+	<string>SRXPrefPaneIcon</string>
+	<key>NSPrincipalClass</key>
+	<string>SRXPrefPanePref</string>
+	<key>NSRequiresAquaSystemAppearance</key>
+	<false/>
+	<key>SRXBuildVersion</key>
+	<integer>2539</integer>
+</dict>
+</plist>
